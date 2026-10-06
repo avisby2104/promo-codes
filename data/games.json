@@ -85,7 +85,7 @@
     "sources": [
       {
         "type": "discord",
-        "label": "Kingshot Discord (gift codes)",
+        "label": "Official Discord (gift codes)",
         "channelId": "1557112048444248115",
         "codeRegex": "Gift Code:\\s*`*([A-Za-z0-9_-]+)",
         "expiresRegex": "Valid Until:\\s*([A-Za-z]+)\\s+(\\d{1,2}),?\\s+(\\d{1,2}):(\\d{2})"
