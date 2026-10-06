@@ -69,5 +69,27 @@
         "rewardFormat": "$1 Gems"
       }
     ]
+  },
+  {
+    "slug": "kingshot",
+    "name": "Kingshot",
+    "platforms": [
+      "android",
+      "ios"
+    ],
+    "redeem": {
+      "android": "Open the gift code page, enter your Player ID (shown on your in-game profile) and the code. Rewards arrive in your in-game mail.",
+      "ios": "Open the gift code page, enter your Player ID (shown on your in-game profile) and the code. Rewards arrive in your in-game mail.",
+      "url": "https://ks-giftcode.centurygame.com/"
+    },
+    "sources": [
+      {
+        "type": "discord",
+        "label": "Kingshot Discord (gift codes)",
+        "channelId": "1557112048444248115",
+        "codeRegex": "Gift Code:\\s*`*([A-Za-z0-9_-]+)",
+        "expiresRegex": "Valid Until:\\s*([A-Za-z]+)\\s+(\\d{1,2}),?\\s+(\\d{1,2}):(\\d{2})"
+      }
+    ]
   }
 ]
