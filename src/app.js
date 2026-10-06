@@ -21,7 +21,7 @@
   }
   document.querySelectorAll('#latest li[data-expires]').forEach(function (li) {
     var label = li.querySelector('.count');
-    if (label && new Date(li.dataset.expires).getTime() <= now) label.textContent = 'expired';
+    if (label && new Date(li.dataset.expires).getTime() <= now) { label.textContent = 'expired'; label.classList.remove('on'); }
   });
 
   document.querySelectorAll('.copy').forEach(function (btn) {

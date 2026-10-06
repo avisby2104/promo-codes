@@ -1,7 +1,7 @@
 // Builds the static site into dist/ from site.json, data/games.json and data/codes/*.json.
 // Run with: node scripts/build.mjs
 
-import { readFile, writeFile, mkdir, rm, copyFile } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, rm, copyFile, cp } from 'node:fs/promises';
 
 const site = JSON.parse(await readFile('site.json', 'utf8'));
 const games = JSON.parse(await readFile('data/games.json', 'utf8'));
@@ -31,11 +31,13 @@ function page({ title, description, path, root, body }) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
+<meta name="theme-color" content="#c9441f">
+<link rel="preload" href="${root}assets/fonts/plus-jakarta-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="canonical" href="${esc(site.url + path)}">
 <link rel="stylesheet" href="${root}assets/style.css">
 </head>
 <body>
-<header class="top"><a href="${root || './'}">${esc(site.name)}</a></header>
+<header class="top"><a href="${root || './'}"><span class="logo" aria-hidden="true">%</span>${esc(site.name)}</a></header>
 <main>
 ${body}
 </main>
@@ -79,6 +81,7 @@ await rm('dist', { recursive: true, force: true });
 await mkdir('dist/assets', { recursive: true });
 await copyFile('src/style.css', 'dist/assets/style.css');
 await copyFile('src/app.js', 'dist/assets/app.js');
+await cp('src/fonts', 'dist/assets/fonts', { recursive: true });
 
 const latest = [];
 const gameRows = [];
@@ -111,12 +114,12 @@ ${redeemSection(game)}
     body
   }));
 
-  gameRows.push(`<li><a href="${esc(game.slug)}/"><span>${esc(game.name)}</span><span class="count">${active.length} active</span></a></li>`);
+  gameRows.push(`<li><a href="${esc(game.slug)}/"><span>${esc(game.name)}</span><span class="count${active.length ? ' on' : ''}">${active.length} active</span></a></li>`);
 }
 
 latest.sort((a, b) => b.c.startsAt.localeCompare(a.c.startsAt));
 const latestRows = latest.slice(0, 10).map(({ game, c }) =>
-  `<li${c.expiresAt ? ` data-expires="${c.expiresAt}"` : ''}><a href="${esc(game.slug)}/"><span><code>${esc(c.code)}</code> ${esc(game.name)}</span><span class="count">${isExpired(c) ? 'expired' : 'active'}</span></a></li>`);
+  `<li${c.expiresAt ? ` data-expires="${c.expiresAt}"` : ''}><a href="${esc(game.slug)}/"><span><code>${esc(c.code)}</code> ${esc(game.name)}</span><span class="count${isExpired(c) ? '' : ' on'}">${isExpired(c) ? 'expired' : 'active'}</span></a></li>`);
 
 await writeFile('dist/index.html', page({
   title: site.name,
