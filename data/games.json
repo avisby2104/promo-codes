@@ -45,5 +45,29 @@
         }
       }
     ]
+  },
+  {
+    "slug": "archero-2",
+    "name": "Archero 2",
+    "platforms": [
+      "android",
+      "ios"
+    ],
+    "redeem": {
+      "android": "Open the official redemption page, enter your User ID (found in-game under Settings) and the code. Rewards arrive in your in-game mailbox.",
+      "ios": "Open the official redemption page, enter your User ID (found in-game under Settings) and the code. Rewards arrive in your in-game mailbox.",
+      "url": "https://gift.archero2.com"
+    },
+    "sources": [
+      {
+        "type": "discord",
+        "label": "Official Discord (gift codes)",
+        "channelId": "1557110515887771718",
+        "codeRegex": "Code:\\s*([A-Za-z0-9_-]+)",
+        "expiresRegex": "Expire time:\\s*<t:(\\d+)",
+        "rewardRegex": "Code:\\s*\\S+\\s*\\(\\s*(\\d+)",
+        "rewardFormat": "$1 Gems"
+      }
+    ]
   }
 ]

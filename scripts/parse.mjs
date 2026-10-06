@@ -2,7 +2,7 @@
 // Returns null when the message does not contain a code.
 //
 // Two ways to describe a source:
-//  - Plain text posts: codeRegex, expiresRegex, requirementsRegex.
+//  - Plain text posts: codeRegex, expiresRegex, requirementsRegex, rewardRegex (+ rewardFormat).
 //  - Bot posts with an embed: fields { code, expires, starts } = the field titles to read.
 
 const MONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'july',
@@ -61,7 +61,10 @@ export function parseMessage(msg, source) {
   if (source.expiresRegex) {
     const m = text.match(new RegExp(source.expiresRegex, 'i'));
     const month = m ? MONTHS.indexOf(m[1].toLowerCase()) : -1;
-    if (month >= 0) {
+    if (m && /^\d{9,}$/.test(m[1])) {
+      // A Discord timestamp such as <t:1791000000:f>: the number is seconds since 1970.
+      expiresAt = new Date(+m[1] * 1000).toISOString();
+    } else if (month >= 0) {
       // Posts give no year: use the year of the post, or the next one if that would be in the past.
       let d = new Date(Date.UTC(postedAt.getUTCFullYear(), month, +m[2], +m[3], +m[4]));
       if (d < postedAt) d = new Date(Date.UTC(postedAt.getUTCFullYear() + 1, month, +m[2], +m[3], +m[4]));
@@ -75,9 +78,15 @@ export function parseMessage(msg, source) {
     if (m) requirements = m[1].trim();
   }
 
+  let reward = null;
+  if (source.rewardRegex) {
+    const m = text.match(new RegExp(source.rewardRegex, 'i'));
+    if (m) reward = (source.rewardFormat || '$1').replace('$1', m[1].trim());
+  }
+
   return {
     code: codeMatch[1],
-    reward: null,
+    reward,
     requirements,
     startsAt: postedAt.toISOString(),
     expiresAt,
