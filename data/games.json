@@ -2,7 +2,10 @@
   {
     "slug": "ludus-merge-arena",
     "name": "Ludus: Merge Arena",
-    "platforms": ["android", "ios"],
+    "platforms": [
+      "android",
+      "ios"
+    ],
     "redeem": {
       "android": "Open the menu on the main screen and go to the \"Promo Code\" section.",
       "ios": "Redeem on the official website.",
@@ -16,6 +19,30 @@
         "codeRegex": "Promo code:\\s*\\**\\s*([A-Za-z0-9]+)",
         "expiresRegex": "before\\s+([A-Za-z]+)\\s+(\\d{1,2}),?\\s+(\\d{1,2}):(\\d{2})\\s*UTC",
         "requirementsRegex": "valid for players who have reached\\s+([^\\n.]+)"
+      }
+    ]
+  },
+  {
+    "slug": "idle-horizons",
+    "name": "Idle Horizons: Dawn of Heroes",
+    "platforms": [
+      "android",
+      "ios"
+    ],
+    "redeem": {
+      "android": "Open the Shop, go to the Misc. section and select \"Code\". The Shop unlocks after story level 10.",
+      "ios": "Open the Shop, go to the Misc. section and select \"Code\". The Shop unlocks after story level 10."
+    },
+    "sources": [
+      {
+        "type": "discord",
+        "label": "Official Discord (weekly promo code)",
+        "channelId": "1557106871825993748",
+        "fields": {
+          "code": "Promo Code",
+          "starts": "Valid From",
+          "expires": "Expires At"
+        }
       }
     ]
   }
