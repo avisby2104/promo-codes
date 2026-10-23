@@ -6,5 +6,13 @@
     "startsAt": "2026-10-05T16:31:00.000Z",
     "expiresAt": "2026-10-10T23:59:00.000Z",
     "source": "Official Discord (gift codes)"
+  },
+  {
+    "code": "OFFICIALSTORE1023",
+    "reward": null,
+    "requirements": null,
+    "startsAt": "2026-10-23T14:31:23.580Z",
+    "expiresAt": "2026-10-27T00:00:00.000Z",
+    "source": "Official Discord (gift codes)"
   }
 ]
