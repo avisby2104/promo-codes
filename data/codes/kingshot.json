@@ -22,5 +22,13 @@
     "startsAt": "2026-10-31T18:27:24.577Z",
     "expiresAt": "2026-11-04T23:59:00.000Z",
     "source": "Official Discord (gift codes)"
+  },
+  {
+    "code": "11OFFICIALSTORE08",
+    "reward": null,
+    "requirements": null,
+    "startsAt": "2026-11-08T16:09:37.511Z",
+    "expiresAt": "2026-11-13T00:00:00.000Z",
+    "source": "Official Discord (gift codes)"
   }
 ]
